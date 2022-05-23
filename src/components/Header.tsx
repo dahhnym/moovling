@@ -1,7 +1,8 @@
-import { Link, useMatch } from 'react-router-dom';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, useAnimation, useViewportScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const Nav = styled(motion.nav)`
   display: flex;
@@ -47,7 +48,7 @@ const Underline = styled(motion.span)`
   margin: 0 auto;
 `;
 
-const Search = styled.span`
+const Search = styled.form`
   color: white;
   display: flex;
   align-items: center;
@@ -62,6 +63,9 @@ const Input = styled(motion.input)`
   position: absolute;
   left: -150px;
   padding: 0.5rem 0.3rem 0.5rem 1.5rem;
+  background-color: transparent;
+  border: solid 1px rgb(255, 255, 255, 0.5);
+  border-radius: 0.3rem;
 `;
 
 const logoVariants = {
@@ -84,6 +88,10 @@ const navVariants = {
     backgroundColor: 'rgba(0,0,0,1)',
   },
 };
+
+interface IForm {
+  keyword: string;
+}
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -113,6 +121,12 @@ const Header = () => {
       }
     });
   }, [scrollY, navAnimation]);
+
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<IForm>();
+  const onValid = (data: IForm) => {
+    navigate(`/search?keyword=${data.keyword}`);
+  };
 
   return (
     <Nav variants={navVariants} animate={navAnimation} initial={'top'}>
@@ -203,7 +217,7 @@ l0 -219 -56 -18 c-137 -46 -154 -20 -154 236 l0 231 105 -6 105 -6 0 -218z"
         </Items>
       </Col>
       <Col>
-        <Search>
+        <Search onSubmit={handleSubmit(onValid)}>
           <motion.svg
             onClick={toggleSearch}
             animate={{ x: searchOpen ? -180 : 0 }}
@@ -219,6 +233,7 @@ l0 -219 -56 -18 c-137 -46 -154 -20 -154 236 l0 231 105 -6 105 -6 0 -218z"
             ></path>
           </motion.svg>
           <Input
+            {...register('keyword', { required: true, minLength: 2 })}
             animate={inputAnimation}
             initial={{ scaleX: 0 }}
             transition={{ type: 'linear' }}
