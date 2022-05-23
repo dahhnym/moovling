@@ -20,8 +20,18 @@ export interface IGetMoviesResult {
   total_results: number;
 }
 
-export function getMovies() {
+export function getMovies(category: string) {
+  let selectedCategory = '';
+
+  if (category.includes('Now')) {
+    selectedCategory = 'now_playing';
+  } else if (category.includes('Top')) {
+    selectedCategory = 'top_rated';
+  } else {
+    selectedCategory = 'upcoming';
+  }
+
   return fetch(
-    `${BASE_PATH}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`,
+    `${BASE_PATH}/movie/${selectedCategory}?api_key=${API_KEY}&language=en-US&page=1`,
   ).then((response) => response.json());
 }
