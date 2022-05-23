@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/moovling/static/css/main.e6c13ad2.css",
+    "main.js": "/moovling/static/js/main.a08a6017.js",
+    "index.html": "/moovling/index.html",
+    "main.e6c13ad2.css.map": "/moovling/static/css/main.e6c13ad2.css.map",
+    "main.a08a6017.js.map": "/moovling/static/js/main.a08a6017.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.a08a6017.js"
+  ]
+}
