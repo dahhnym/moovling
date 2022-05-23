@@ -38,9 +38,6 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
-body {
-  line-height: 1;
-}
 menu, ol, ul {
   list-style: none;
 }
@@ -60,6 +57,7 @@ table {
   box-sizing: border-box;
 }
 body {
+  line-height: 1;
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
   color:${(props) => props.theme.white.darker};
