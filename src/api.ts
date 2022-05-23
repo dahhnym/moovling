@@ -1,4 +1,3 @@
-const API_KEY = 'ba70c390de4655e9260f08d4ffa9a63f';
 const BASE_PATH = 'https://api.themoviedb.org/3';
 
 export interface IMovie {
@@ -32,6 +31,6 @@ export function getMovies(category: string) {
   }
 
   return fetch(
-    `${BASE_PATH}/movie/${selectedCategory}?api_key=${API_KEY}&language=en-US&page=1`,
+    `${BASE_PATH}/movie/${selectedCategory}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`,
   ).then((response) => response.json());
 }
